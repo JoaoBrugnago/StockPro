@@ -1,0 +1,28 @@
+.container {
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: block;
+  font-size: 1rem;
+  line-height: 1;
+  padding-bottom: .1rem;
+}
+
+.input {
+  height: 20px;
+  border: 1px solid #888;
+  border-radius: .4rem;
+  width: 100%;
+  padding: .3rem;
+  font-size: 1rem;
+  background: #ddd;
+  transition: .2s;
+}
+
+.input:hover, .input:focus {
+  outline: none;
+  border-color: #fea;
+  background: white;
+  box-shadow: 0 0 0 2px #fb1;
+}
