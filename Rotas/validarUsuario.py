@@ -11,25 +11,39 @@ validarUsuario = Blueprint('validarUsuario', __name__)
 def validarUsuario_route():
     usuario = None
     senha = None
+    temErro  = False
+    mensagem = 'OK'
+    valido = True
 
-    if not request.is_json:
-        return {
-            'resposta': False,
-            'mensagem': 'A solicitação deve ser JSON',
-        }
-    
-    if request.is_json:
+    if (temErro == False):
+        if (not request.is_json):
+            temErro = True
+            mensagem = 'O body da requisição deve ser JSON'
+
+    if (temErro == False):
         dados = request.json
         usuario = dados.get('usuario')
         senha = dados.get('senha')
 
-    if (usuario == usuarioPadrao and senha == senhaPadrao):
-        return {
-            'resposta': True,
-            'mensagem': 'OK',
-        }
-    else:
-        return {
-            'resposta': False,
-            'mensagem': 'Usuário e/ou senha inválidos',
-        }
+    if (temErro == False):
+        if (usuario == None or senha == None):
+            temErro = True
+            mensagem = 'Dados inválidos no body da requisição'
+    
+    if (temErro == False):
+        if (usuario != usuarioPadrao and senha != senhaPadrao):
+            temErro = True
+            mensagem = 'Usuário e senha incorretos'
+
+    if (temErro == False):
+        if (usuario != usuarioPadrao or senha != senhaPadrao):
+            temErro = True
+            mensagem = 'Usuário ou senha incorretos'
+    
+    if (temErro == True):
+        valido = False
+
+    return {
+        'valido': valido,
+        'mensagem': mensagem,
+    }

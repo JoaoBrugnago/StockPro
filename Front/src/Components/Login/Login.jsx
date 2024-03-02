@@ -15,9 +15,9 @@ const Login = () => {
     event.preventDefault()
     if (user.validate() && password.validate()) {
       const {url, options} = USER_VALIDATE({usuario: user.value, senha:password.value})
-      const response = await request(url, options)
-      console.log(data)
-      console.log(error)
+      const {json} = await request(url, options)
+      console.log(json)
+      //-- Fazer navigate para a página inicial do app caso o login esteja correto.
     }
   }
 
@@ -38,6 +38,7 @@ const Login = () => {
       />
       <Button>Enviar</Button>
     </form>
+    {error && <p>{error}</p>}
     </>
   )
 }
