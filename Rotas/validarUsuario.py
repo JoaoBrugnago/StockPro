@@ -1,5 +1,8 @@
 from flask import Blueprint, request, jsonify
 from markupsafe import escape
+from Seguranca.retornaChaveSecreta import ChaveSecreta
+import jwt
+from datetime import datetime, timedelta
 
 # Usuário padrão para entrar no sistema, só existirá um.
 usuarioPadrao = 'Suzana'
@@ -42,8 +45,20 @@ def validarUsuario_route():
     
     if (temErro == True):
         valido = False
+    else:
+        chave = ChaveSecreta()
+        chave_secreta = chave.chaveSecreta()
+        # Gerar token JWT válido por 24 horas
+        expiracao = datetime.utcnow() + timedelta(hours=24)
+        try:
+            token = jwt.encode({'usuario': usuario, 'exp': expiracao}, chave_secreta, algorithm='HS256')
+        except Exception as e:
+            valido = False
+            mensagem = 'Erro ao gerar o token JWT: {}'.format(str(e))
+
 
     return {
         'valido': valido,
         'mensagem': mensagem,
+        'token': token.decode('utf-8') if token else None
     }

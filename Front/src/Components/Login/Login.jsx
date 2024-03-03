@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const user = useForm();
   const password = useForm();
-  const { request, data, loading, error } = useFetch();
+  const { request, loading, error } = useFetch();
   const [resposta, setResposta] = React.useState(null)
   const navigate = useNavigate()
 
@@ -28,6 +28,8 @@ const Login = () => {
       } else {
         setResposta(json.mensagem)
       }
+    } else {
+      setResposta('Dados incompletos')
     }
   }
 
@@ -38,7 +40,7 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <Input label="Usuário" type="text" name="user" {...user} />
           <Input label="Senha" type="password" name="password" {...password} />
-          <Button>Enviar</Button>
+          {loading ? <Button minWidth='3rem' disabled>Enviar</Button> : <Button minWidth='3rem'>Enviar</Button>}
         </form>
         {error && <Error error={error} />}
         {resposta && error === null && <Error error={resposta} />}

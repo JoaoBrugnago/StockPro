@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './Button.module.css'
 
-const Button = ({children}) => {
+const Button = ({children, minWidth}) => {
   return (
-    <button className={styles.button}>
+    <button style={{minWidth: minWidth}} className={styles.button}>
       {children}
     </button>
   )
