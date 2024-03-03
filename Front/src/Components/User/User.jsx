@@ -3,8 +3,19 @@ import styles from './User.module.css'
 import Button from '../Form/Button'
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/logo.svg'
+import useFetch from '../../Hooks/useFetch'
+import { TOKEN_VALIDATE } from '../../Api'
 
 const User = () => {
+  const { request, loading, error } = useFetch();
+
+  React.useEffect( async() => {
+    const token = window.localStorage.getItem('token')
+    const {url, options} = TOKEN_VALIDATE(token)
+    const {json} = await request(url, options)
+    console.log(json)
+  }, [])
+
   return (
     <section className={styles.section}>
         <img src={Logo} alt="Stockpro" />

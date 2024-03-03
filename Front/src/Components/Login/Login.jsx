@@ -23,14 +23,13 @@ const Login = () => {
         senha: password.value,
       });
       const { json } = await request(url, options);
-      
-      /*
       if (json.valido === true && json.mensagem === 'OK') {
+        window.localStorage.setItem('token', json.token)
         navigate('/conta')
       } else {
         setResposta(json.mensagem)
       }
-      */
+
       console.log(json)
 
     } else {

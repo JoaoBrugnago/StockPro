@@ -12,3 +12,15 @@ export function USER_VALIDATE(body) {
     },
   };
 }
+
+export function TOKEN_VALIDATE(token) {
+  return {
+    url: API_URL + '/api/validarToken',
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    },
+  };
+}
