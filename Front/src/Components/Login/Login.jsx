@@ -23,11 +23,16 @@ const Login = () => {
         senha: password.value,
       });
       const { json } = await request(url, options);
+      
+      /*
       if (json.valido === true && json.mensagem === 'OK') {
         navigate('/conta')
       } else {
         setResposta(json.mensagem)
       }
+      */
+      console.log(json)
+
     } else {
       setResposta('Dados incompletos')
     }

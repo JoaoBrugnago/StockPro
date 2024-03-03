@@ -14,6 +14,7 @@ class ChaveSecreta:
         self.chave_secreta = file.read().strip()
         if not self.chave_secreta:
           self.chave_secreta = self.verificacao()
+          
     return self.chave_secreta
     
   def verificacao(self):
