@@ -9,7 +9,6 @@ import { userContext } from '../../UserContext'
 
 const User = () => {
   const {login, userLogout} = useContext(userContext)
-  const navigate = useNavigate()
 
   React.useEffect(() => {
     if (login === false) userLogout()
