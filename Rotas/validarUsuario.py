@@ -6,7 +6,8 @@ from datetime import datetime, timedelta
 
 # Usuário padrão para entrar no sistema, só existirá um.
 usuarioPadrao = 'Suzana'
-senhaPadrao = 'Suso@res021196!'
+#senhaPadrao = 'Suso@res021196!'
+senhaPadrao = 'Su'
 
 validarUsuario = Blueprint('validarUsuario', __name__)
 

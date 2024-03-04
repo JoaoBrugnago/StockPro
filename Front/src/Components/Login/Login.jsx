@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './Login.module.css';
 import useForm from '../../Hooks/useForm';
 import useFetch from '../../Hooks/useFetch';
@@ -7,6 +7,7 @@ import Button from '../Form/Button';
 import { USER_VALIDATE } from '../../Api';
 import Error from '../Helper/Error';
 import { useNavigate } from 'react-router-dom';
+import { userContext } from '../../UserContext';
 
 const Login = () => {
   const user = useForm();
@@ -14,6 +15,11 @@ const Login = () => {
   const { request, loading, error } = useFetch();
   const [resposta, setResposta] = React.useState(null)
   const navigate = useNavigate()
+  const {login, setLogin} = useContext(userContext)
+
+  React.useEffect(() => {
+    if (login === true) navigate('/conta')
+  }, [login])
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -25,13 +31,11 @@ const Login = () => {
       const { json } = await request(url, options);
       if (json.valido === true && json.mensagem === 'OK') {
         window.localStorage.setItem('token', json.token)
+        setLogin(true)
         navigate('/conta')
       } else {
         setResposta(json.mensagem)
       }
-
-      console.log(json)
-
     } else {
       setResposta('Dados incompletos')
     }
