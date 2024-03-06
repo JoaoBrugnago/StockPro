@@ -73,6 +73,8 @@ const DadosTabela = ({data, pagina, setPagina, qtdRegistros}) => {
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
           placeholder={`${pagina}`}
+          min={1}
+          max={qtdPagina}
         />
         {`de ${qtdPagina}`}
         <button onClick={handleNextPage} disabled={pagina === qtdPagina}>P</button>
