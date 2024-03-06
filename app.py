@@ -33,6 +33,7 @@ from flask import Flask, send_from_directory, send_file
 from flask_cors import CORS
 from Rotas.validarUsuario import validarUsuario
 from Rotas.validarToken import validarToken
+from Rotas.retornarDadosVendas import retornarDadosVendas
 import os
 
 app = Flask(__name__)
@@ -41,6 +42,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.register_blueprint(validarUsuario)
 app.register_blueprint(validarToken)
+app.register_blueprint(retornarDadosVendas)
 
 # Rota para servir o arquivo HTML principal do React
 @app.route('/')

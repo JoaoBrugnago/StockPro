@@ -24,3 +24,16 @@ export function TOKEN_VALIDATE(token) {
     },
   };
 }
+
+export function VENDAS_DATA(body) {
+  return {
+    url: API_URL + '/api/dadosVendas',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}

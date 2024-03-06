@@ -1,10 +1,8 @@
 import React, { useContext } from 'react'
 import styles from './User.module.css'
 import Button from '../Form/Button'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Logo from '../../assets/logo.svg'
-import useFetch from '../../Hooks/useFetch'
-import { TOKEN_VALIDATE } from '../../Api'
 import { userContext } from '../../UserContext'
 
 const User = () => {

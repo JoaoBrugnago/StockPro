@@ -6,8 +6,7 @@ from datetime import datetime, timedelta
 
 # Usuário padrão para entrar no sistema, só existirá um.
 usuarioPadrao = 'Suzana'
-#senhaPadrao = 'Suso@res021196!'
-senhaPadrao = 'Su'
+senhaPadrao = 'Suso@res021196!'
 
 validarUsuario = Blueprint('validarUsuario', __name__)
 
@@ -56,7 +55,6 @@ def validarUsuario_route():
 
         try:
             token = jwt.encode({'usuario': usuario, 'exp': expiracao}, chave_secreta, algorithm='HS256')
-            #token = token.decode('utf-8')
         except Exception as e:
             token = f"Erro ao gerar o token JWT: {e}"
 
