@@ -1,0 +1,68 @@
+.container {
+  margin: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: start;
+  align-items: flex-start;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid rgba(0, 0, 0, .7);
+}
+
+.table th, .table tr {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.thead {
+  background: rgb(255, 187, 17, .8);
+}
+
+.tbody {
+  background: rgba(0, 0, 0, .1);
+}
+
+.tbody th {
+  color: #525252;
+}
+
+.tbody tr:hover {
+  background: rgb(255, 187, 17, .2);
+}
+
+.navegacao {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.navegacao button {
+  background-color: rgb(255, 187, 17, .8);
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.navegacao input[type='number'] {
+  width: 30px;
+  padding: 5px;
+  font-size: 15px;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+}
+
+.navegacao button:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}

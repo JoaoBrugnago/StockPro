@@ -1,6 +1,5 @@
 import React from 'react'
-import Input from '../Form/Input'
-import useForm from '../../Hooks/useForm';
+import styles from './DadosTabela.module.css'
 
 const DadosTabela = ({data, pagina, setPagina, qtdRegistros}) => {
   const {rotulos, registros, numero} = data
@@ -50,14 +49,14 @@ const DadosTabela = ({data, pagina, setPagina, qtdRegistros}) => {
   }
 
   return (
-    <div>
-      <table>
-        <thead>
+    <div className={styles.container}>
+      <table className={styles.table}>
+        <thead className={styles.thead}>
           <tr>
             {rotulos.map((rotulo, index) => <th key={index}>{rotulo}</th>)}
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.tbody}>
           {registros.map((registro, index) => <tr key={index}>
             {registro.map((item, index) => <th key={index}>
               {item}
@@ -65,18 +64,20 @@ const DadosTabela = ({data, pagina, setPagina, qtdRegistros}) => {
           </tr>)}
         </tbody>
       </table>
-      <div>
+      <div className={styles.navegacao}>
         <button onClick={handleFirstPage} disabled={pagina === 1}>P</button>
         <button onClick={handlePrevPage} disabled={pagina === 1}>A</button>
+        {' '}
         <input 
           type='number'
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
+          onBlur={() => setInputPage('')}
           placeholder={`${pagina}`}
           min={1}
           max={qtdPagina}
         />
-        {`de ${qtdPagina}`}
+        {` de ${qtdPagina} `}
         <button onClick={handleNextPage} disabled={pagina === qtdPagina}>P</button>
         <button onClick={handleLastPage} disabled={pagina === qtdPagina}>U</button>
       </div>
