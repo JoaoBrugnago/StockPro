@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './DadosFiltros.module.css'
 
 const DadosFiltros = ({filtros}) => {
   const [tempFiltros, setTempFiltros] = React.useState({})
@@ -27,8 +28,8 @@ const DadosFiltros = ({filtros}) => {
   }
 
   return (
-    <div>
-      {filtros.map((item) => <div>
+    <div className={styles.container}>
+      {filtros.map((item) => <div key={item.name}>
         <label htmlFor={item.name}>{item.label}</label>
         <input 
           name={item.name} 
