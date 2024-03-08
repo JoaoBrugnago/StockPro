@@ -2,7 +2,7 @@
   padding: 1rem 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 30px;
+  gap: 15px;
 }
 
 .container div {

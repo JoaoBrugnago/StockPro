@@ -30,7 +30,8 @@
 }
 
 .tbody tr:hover {
-  background: rgb(255, 187, 17, .2);
+  /*background: rgb(255, 187, 17, .2);*/
+  background: white;
 }
 
 .navegacao {

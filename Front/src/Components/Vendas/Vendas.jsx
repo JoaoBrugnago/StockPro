@@ -7,24 +7,20 @@ import { VENDAS_DATA } from '../../Api'
 import Error from '../Helper/Error'
 import Loading from '../Helper/Loading'
 import RetornaDataInicioAno from '../Utils/RetornaDataInicioAno'
+import RetornaDataDeHoje from '../Utils/RetornaDataDeHoje'
 import DadosFiltros from '../Dados/DadosFiltros'
 
 const Vendas = () => {
   const {login, userLogout} = useContext(userContext)
   const {data, error, loading, request} = useFetch()
   const [pagina, setPagina] = React.useState(1)
-  const [qtdRegistros, setQtdRegistros] = React.useState(10)
+  const [qtdRegistros, setQtdRegistros] = React.useState(2)
   //const [registrosTotais, setRegistrosTotais] = React.useState(0)
 
   const [dataInicial, setDataInicial] = React.useState(RetornaDataInicioAno())
-  const [dataFinal, setDataFinal] = React.useState(() => {
-    const data = new Date(); 
-    const fusoHorarioLocal = data.getTimezoneOffset() / 60;
-    data.setHours(data.getHours() - fusoHorarioLocal);
-    return data.toISOString().split('T')[0];
-  })
-  const [cliente, setCliente] = React.useState('')
-  const [valor, setValor] = React.useState(0)
+  const [dataFinal, setDataFinal] = React.useState(RetornaDataDeHoje())
+  const [cliente, setCliente] = React.useState('1')
+  const [valor, setValor] = React.useState(1000)
 
   const filtros = [
     {name: 'dataInicial', label: 'Data inicial', type: 'date', value: dataInicial, setValue: setDataInicial},
@@ -39,7 +35,7 @@ const Vendas = () => {
 
   React.useEffect(() => {
     async function fetchData() {
-      const {url, options} = VENDAS_DATA({qtdRegistros, pagina})
+      const {url, options} = VENDAS_DATA({qtdRegistros, pagina, dataInicial, dataFinal, cliente, valor})
       await request(url, options)
     }
     fetchData()

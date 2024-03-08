@@ -59,7 +59,7 @@ def validarUsuario_route():
             token = f"Erro ao gerar o token JWT: {e}"
 
         
-
+    print('passou')
     return {
         'valido': valido,
         'mensagem': mensagem,
