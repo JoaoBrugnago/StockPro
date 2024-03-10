@@ -31,5 +31,5 @@ def serve_static(filename):
         return send_from_directory(os.path.join(root_dir), 'index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
 
