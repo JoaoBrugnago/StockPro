@@ -1,4 +1,4 @@
-Flask==2.0.2
+Flask==1.1.4
 Flask-Cors
 PyJWT==2.3.0
 pyodbc
