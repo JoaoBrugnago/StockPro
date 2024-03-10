@@ -22,7 +22,7 @@ const Vendas = () => {
 
   //-- Variáveis para navegação da grid
   const [pagina, setPagina] = React.useState(1)
-  const [registrosTotaisTabela, setRegistrosTotaisTabela] = React.useState(174)
+  const [registrosTotaisTabela, setRegistrosTotaisTabela] = React.useState(0)
 
   //-- Variáveis a serem usadas nos filtros
   const [registrosTotaisLidos, setRegistrosTotaisLidos] = React.useState(10)
@@ -44,33 +44,25 @@ const Vendas = () => {
     if (login === false) userLogout()
   }, [login, userLogout])
 
-  /*
   React.useEffect(() => {
     async function fetchRegistros() {
       const {url, options} = REGISTROS_TOTAIS_VENDAS({dataInicial, dataFinal, cliente, valor})
-      await requestDadosIndividuais(url, options)
-      if (dadosIndividuais && dadosIndividuais.registrosTotaisTabela) {
-        setRegistrosTotaisTabela(dadosIndividuais.registrosTotaisTabela);
-      }
-      console.log('fez o fetch da quantidade')
-      console.log('registros totais tabela: ' + registrosTotaisTabela.toString())
+      const {json} = await requestDadosIndividuais(url, options)
+      setRegistrosTotaisTabela(json.registrosTotaisTabela);
     }
     fetchRegistros()
   }, [dataInicial, dataFinal, cliente, valor])
-  */
 
   React.useEffect(() => {
     async function fetchData() {
       const {url, options} = VENDAS_DATA({registrosTotaisLidos, pagina, dataInicial, dataFinal, cliente, valor})
       await requestDadosTotais(url, options)
-      console.log('fez o fetch principal')
-      console.log('registros usuário: ' + registrosTotaisLidos.toString())
     }
     fetchData()
   }, [requestDadosTotais, pagina, registrosTotaisLidos, dataInicial, dataFinal, cliente, valor])
 
-  if (errorDadosTotais) return <Error error={errorDadosTotais} />
-  if (loadingDadosTotais) return <Loading />
+  if (errorDadosTotais || errorDadosIndividuais) return <Error error={errorDadosTotais || errorDadosIndividuais} />
+  if (loadingDadosTotais || loadingDadosIndividuais) return <Loading />
   if (dadosTotais)
   return (
     <>
