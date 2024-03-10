@@ -24,7 +24,7 @@ def index():
 # Rota para servir os outros arquivos estáticos do React
 @app.route('/<path:filename>')
 def serve_static(filename):
-    root_dir = os.path.join(os.getcwd(), 'Front', 'dist')
+    root_dir = os.path.join(os.getcwd(), 'Front', 'dist', 'assets')
     if os.path.exists(os.path.join(root_dir, filename)):
         return send_file(os.path.join(root_dir, filename))
     else:
