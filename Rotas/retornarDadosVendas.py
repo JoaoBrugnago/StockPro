@@ -1,6 +1,5 @@
 from flask import Blueprint, request
 from markupsafe import escape
-from datetime import datetime
 from Funcoes.retorna_dados_vendas import DadosVendas
 
 retornarDadosVendas = Blueprint('retornarDadosVendas', __name__)
@@ -9,7 +8,6 @@ dadosVendas = DadosVendas()
 @retornarDadosVendas.route('/api/dadosVendas', methods=['POST'])
 def retornarDadosVendas_route():
     temErro  = False
-    valido = True
 
     if (temErro == False):
         if (not request.is_json):
@@ -17,15 +15,15 @@ def retornarDadosVendas_route():
 
     if (temErro == False):
         dados = request.json
-        qtdRegistros = int(dados.get('qtdRegistros'))
+        registrosTotaisLidos = int(dados.get('registrosTotaisLidos'))
         pagina = int(dados.get('pagina'))
         dataInicial = dados.get('dataInicial')
         dataFinal = dados.get('dataFinal')
         cliente = str(dados.get('cliente'))
         valor = float(dados.get('valor'))
         #Lógica para retorno
-        inicioLeitura = (pagina - 1) * qtdRegistros
-        fimLeitura = inicioLeitura + qtdRegistros
+        inicioLeitura = (pagina - 1) * registrosTotaisLidos
+        fimLeitura = inicioLeitura + registrosTotaisLidos
 
     if (temErro == False):
         rotulos = ['', 'Venda', 'Data', 'Cliente', 'Valor']
@@ -49,13 +47,10 @@ def retornarDadosVendas_route():
             print(f"Erro ao retornar dados de vendas: {e}")
         
     if (temErro == True):
-        valido = False
         rotulos = []
         registros = []
 
     return {
-        'valido': valido,
         'rotulos': rotulos,
         'registros': registros,
-        'numero': 174 # Apenas para teste de setas no front
     }

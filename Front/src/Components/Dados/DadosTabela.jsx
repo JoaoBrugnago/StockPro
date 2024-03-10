@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './DadosTabela.module.css'
 
-const DadosTabela = ({data, pagina, setPagina, qtdRegistros}) => {
-  const {rotulos, registros, numero} = data
-  const qtdPagina = Math.ceil(numero / qtdRegistros);
+const DadosTabela = ({dadosTotais, pagina, setPagina, registrosTotaisTabela, registrosTotaisLidos}) => {
+  const {rotulos, registros} = dadosTotais
+  const qtdPagina = Math.ceil(registrosTotaisTabela / registrosTotaisLidos);
   const [inputPage, setInputPage] = React.useState('');
 
   function handleFirstPage() {

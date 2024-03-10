@@ -37,3 +37,16 @@ export function VENDAS_DATA(body) {
     },
   };
 }
+
+export function REGISTROS_TOTAIS_VENDAS(body) {
+  return {
+    url: API_URL + '/api/registrosTotaisVendas',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}

@@ -3,7 +3,7 @@ import styles from './Vendas.module.css'
 import { userContext } from '../../UserContext'
 import useFetch from '../../Hooks/useFetch'
 import DadosTabela from '../Dados/DadosTabela'
-import { VENDAS_DATA } from '../../Api'
+import { REGISTROS_TOTAIS_VENDAS, VENDAS_DATA } from '../../Api'
 import Error from '../Helper/Error'
 import Loading from '../Helper/Loading'
 import RetornaDataInicioAno from '../Utils/RetornaDataInicioAno'
@@ -11,44 +11,71 @@ import RetornaDataDeHoje from '../Utils/RetornaDataDeHoje'
 import DadosFiltros from '../Dados/DadosFiltros'
 
 const Vendas = () => {
+  //-- Variável para validação de login
   const {login, userLogout} = useContext(userContext)
-  const {data, error, loading, request} = useFetch()
-  const [pagina, setPagina] = React.useState(1)
-  const [qtdRegistros, setQtdRegistros] = React.useState(2)
-  //const [registrosTotais, setRegistrosTotais] = React.useState(0)
 
+  // Hook de fetch para dados individuais
+  const { data: dadosIndividuais, error: errorDadosIndividuais, loading: loadingDadosIndividuais, request: requestDadosIndividuais } = useFetch();
+
+  // Hook de fetch para dados totais
+  const { data: dadosTotais, error: errorDadosTotais, loading: loadingDadosTotais, request: requestDadosTotais } = useFetch();
+
+  //-- Variáveis para navegação da grid
+  const [pagina, setPagina] = React.useState(1)
+  const [registrosTotaisTabela, setRegistrosTotaisTabela] = React.useState(174)
+
+  //-- Variáveis a serem usadas nos filtros
+  const [registrosTotaisLidos, setRegistrosTotaisLidos] = React.useState(10)
   const [dataInicial, setDataInicial] = React.useState(RetornaDataInicioAno())
   const [dataFinal, setDataFinal] = React.useState(RetornaDataDeHoje())
-  const [cliente, setCliente] = React.useState('1')
-  const [valor, setValor] = React.useState(1000)
+  const [cliente, setCliente] = React.useState(0)
+  const [valor, setValor] = React.useState(0)
 
+  //-- Variáveis para filtros da grid
   const filtros = [
     {name: 'dataInicial', label: 'Data inicial', type: 'date', value: dataInicial, setValue: setDataInicial},
     {name: 'dataFinal', label: 'Data final', type: 'date', value: dataFinal, setValue: setDataFinal},
     {name: 'cliente', label: 'Cliente', type: 'text', value: cliente, setValue: setCliente},
     {name: 'valor', label: 'Valor', type: 'Number', value: valor, setValue: setValor},
+    {name: 'registrosTotaisLidos', label: 'Qtd registros', type: 'Number', value: registrosTotaisLidos, setValue: setRegistrosTotaisLidos},
   ]
 
   React.useEffect(() => {
     if (login === false) userLogout()
   }, [login, userLogout])
 
+  /*
+  React.useEffect(() => {
+    async function fetchRegistros() {
+      const {url, options} = REGISTROS_TOTAIS_VENDAS({dataInicial, dataFinal, cliente, valor})
+      await requestDadosIndividuais(url, options)
+      if (dadosIndividuais && dadosIndividuais.registrosTotaisTabela) {
+        setRegistrosTotaisTabela(dadosIndividuais.registrosTotaisTabela);
+      }
+      console.log('fez o fetch da quantidade')
+      console.log('registros totais tabela: ' + registrosTotaisTabela.toString())
+    }
+    fetchRegistros()
+  }, [dataInicial, dataFinal, cliente, valor])
+  */
+
   React.useEffect(() => {
     async function fetchData() {
-      const {url, options} = VENDAS_DATA({qtdRegistros, pagina, dataInicial, dataFinal, cliente, valor})
-      await request(url, options)
+      const {url, options} = VENDAS_DATA({registrosTotaisLidos, pagina, dataInicial, dataFinal, cliente, valor})
+      await requestDadosTotais(url, options)
+      console.log('fez o fetch principal')
+      console.log('registros usuário: ' + registrosTotaisLidos.toString())
     }
     fetchData()
-    console.log('fez o fetch')
-  }, [pagina, qtdRegistros, request, dataInicial, dataFinal, cliente, valor])
+  }, [requestDadosTotais, pagina, registrosTotaisLidos, dataInicial, dataFinal, cliente, valor])
 
-  if (error) return <Error error={error} />
-  if (loading) return <Loading />
-  if (data)
+  if (errorDadosTotais) return <Error error={errorDadosTotais} />
+  if (loadingDadosTotais) return <Loading />
+  if (dadosTotais)
   return (
     <>
       <DadosFiltros filtros={filtros}/>
-      <DadosTabela data={data} pagina={pagina} setPagina={setPagina} qtdRegistros={qtdRegistros} />
+      <DadosTabela dadosTotais={dadosTotais} pagina={pagina} setPagina={setPagina} registrosTotaisTabela={registrosTotaisTabela} registrosTotaisLidos={registrosTotaisLidos} />
     </>
   )
   else return null
