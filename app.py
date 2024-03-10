@@ -4,8 +4,8 @@ from Rotas.validarUsuario import validarUsuario
 from Rotas.validarToken import validarToken
 from Rotas.retornarDadosVendas import retornarDadosVendas
 from Rotas.retornarRegistrosVendas import retornarRegistrosVendas
-
 import os
+from waitress import serve
 
 app = Flask(__name__)
 
@@ -31,5 +31,6 @@ def serve_static(filename):
         return send_from_directory(os.path.join(root_dir), 'index.html')
 
 if __name__ == '__main__':
-    app.run(debug=False)
-
+    #app.run(debug=False)
+    port = int(os.environ.get('PORT', 5000))
+    serve(app, host='0.0.0.0', port=port)
