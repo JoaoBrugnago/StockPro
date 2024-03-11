@@ -36,3 +36,4 @@ class DadosVendas:
       conn.close()
 
     return registros
+  
