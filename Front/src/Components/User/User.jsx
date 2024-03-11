@@ -4,6 +4,7 @@ import Button from '../Form/Button'
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/logo.svg'
 import { userContext } from '../../UserContext'
+import Head from '../Helper/Head'
 
 const User = () => {
   const {login, userLogout} = useContext(userContext)
@@ -14,6 +15,7 @@ const User = () => {
 
   return (
     <section className={`${styles.section} animeLeft`}>
+      <Head title='Menu' description='Menu de escolhas do usuário' />
         <img src={Logo} alt="Stockpro" />
         <div className={styles.links}>
           <Link to='/vendas'><Button minWidth='10rem'>Vendas</Button></Link>

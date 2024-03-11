@@ -8,6 +8,7 @@ import { USER_VALIDATE } from '../../Api';
 import Error from '../Helper/Error';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../../UserContext';
+import Head from '../Helper/Head';
 
 const Login = () => {
   const user = useForm();
@@ -43,6 +44,7 @@ const Login = () => {
 
   return (
     <section className={`${styles.section} animeLeft`}>
+      <Head title='Login' description='Login do sistema stockpro'/>
       <h1 className='title'>Login</h1>
       <div>
         <form onSubmit={handleSubmit}>

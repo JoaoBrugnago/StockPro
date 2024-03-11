@@ -25,7 +25,8 @@ export const UserStorage = ({children}) => {
           const json = await response.json()
           if (json.valido === true) {
             setLogin(true)
-            navigate('/conta')
+            const paginaAtual = window.location.pathname
+            navigate(paginaAtual || 'conta')
           } else {
             userLogout()
           }

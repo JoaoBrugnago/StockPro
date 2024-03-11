@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './DadosFiltros.module.css'
+import Head from '../Helper/Head'
 
 const DadosFiltros = ({filtros}) => {
   const [tempFiltros, setTempFiltros] = React.useState({})
@@ -29,6 +30,7 @@ const DadosFiltros = ({filtros}) => {
 
   return (
     <div className={styles.container}>
+      <Head title='Dados' description='Dados de vendas do sistema stockpro'/>
       {filtros.map((item) => <div key={item.name}>
         <label htmlFor={item.name}>{item.label}</label>
         <input 
