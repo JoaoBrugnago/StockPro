@@ -53,7 +53,7 @@ const Vendas = () => {
       const {url, options} = REGISTROS_TOTAIS_VENDAS({dataInicial, dataFinal, cliente, valor})
       console.log('Vai entrar no fetch')
       const {json} = await requestDadosIndividuais(url, options)
-      setRegistrosTotaisTabela('Mensagens do back: ' + json.registrosTotaisTabela);
+      setRegistrosTotaisTabela(json.registrosTotaisTabela);
       console.log(json.messages)
     }
     fetchRegistros()
