@@ -11,6 +11,7 @@ import RetornaDataDeHoje from '../Utils/RetornaDataDeHoje'
 import DadosFiltros from '../Dados/DadosFiltros'
 
 const Vendas = () => {
+  console.log('Entrou em vendas')
   //-- Variável para validação de login
   const {login, userLogout} = useContext(userContext)
 
@@ -41,11 +42,12 @@ const Vendas = () => {
   ]
 
   React.useEffect(() => {
+    console.log('Entrou no effect do login')
     if (login === false) userLogout()
   }, [login, userLogout])
 
   React.useEffect(() => {
-    console.log('Entrou no effect')
+    console.log('Entrou no effect dos registros')
     async function fetchRegistros() {
       console.log('Vai pegar os dados')
       const {url, options} = REGISTROS_TOTAIS_VENDAS({dataInicial, dataFinal, cliente, valor})
