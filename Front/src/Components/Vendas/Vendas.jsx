@@ -45,10 +45,13 @@ const Vendas = () => {
   }, [login, userLogout])
 
   React.useEffect(() => {
+    console.log('Entrou no effect')
     async function fetchRegistros() {
+      console.log('Vai pegar os dados')
       const {url, options} = REGISTROS_TOTAIS_VENDAS({dataInicial, dataFinal, cliente, valor})
+      console.log('Vai entrar no fetch')
       const {json} = await requestDadosIndividuais(url, options)
-      setRegistrosTotaisTabela(json.registrosTotaisTabela);
+      setRegistrosTotaisTabela('Mensagens do back: ' + json.registrosTotaisTabela);
       console.log(json.messages)
     }
     fetchRegistros()
