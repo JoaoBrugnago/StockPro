@@ -4,8 +4,9 @@ from Rotas.validarUsuario import validarUsuario
 from Rotas.validarToken import validarToken
 from Rotas.retornarDadosVendas import retornarDadosVendas
 from Rotas.retornarRegistrosVendas import retornarRegistrosVendas
-import os
+
 from waitress import serve
+import os
 
 app = Flask(__name__)
 
