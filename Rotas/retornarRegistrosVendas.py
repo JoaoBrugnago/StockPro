@@ -25,6 +25,7 @@ def retornarRegistrosVendas_route():
 
     if (temErro == False):
         messages += 'Vai entrar no try > '
+        print('Print teste')
         try:
             messages += 'Entrou no try '
             registrosTotaisTabela = registrosvendas.retorna_qtdregistros_vendas(dataInicial, dataFinal, cliente, valor)
