@@ -8,6 +8,7 @@ class RegistrosVendas:
     self.conn_str = bancoDeDados.conn_str
 
   def retorna_qtdregistros_vendas(self, dataInicial, dataFinal, cliente, valor):
+    print('Entrei no qtd registro')
     conn = pyodbc.connect(self.conn_str)
     cursor = conn.cursor()
     try:
