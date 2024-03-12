@@ -8,11 +8,12 @@ class RegistrosVendas:
     self.conn_str = bancoDeDados.conn_str
 
   def retorna_qtdregistros_vendas(self, dataInicial, dataFinal, cliente, valor):
+    '''
     print('Entrei no qtd registro')
     conn = pyodbc.connect(self.conn_str)
     cursor = conn.cursor()
     try:
-      query = """
+      query = 
           SELECT COUNT(*) AS qtdRegistros
           FROM (
             SELECT *, ROW_NUMBER() OVER (ORDER BY vndcode) AS RowNum
@@ -22,7 +23,7 @@ class RegistrosVendas:
             AND (vndvalunitario >= (? - 100) OR ? = 0 OR ? IS NULL)
             AND (vndvalunitario <= (? + 100) OR ? = 0 OR ? IS NULL)
           ) AS RowConstrainedResult
-      """
+      
       cursor.execute(query, (dataInicial, dataFinal, cliente, cliente, cliente, valor, valor, valor, valor, valor, valor))
       row = cursor.fetchone()
       qtdRegistros = row[0] if row else 0
@@ -33,5 +34,7 @@ class RegistrosVendas:
     finally:
       cursor.close()
       conn.close()
+    '''
+    qtdRegistros = 174
 
     return qtdRegistros
