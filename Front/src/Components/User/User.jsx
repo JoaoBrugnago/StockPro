@@ -18,9 +18,9 @@ const User = () => {
       <Head title='Menu' description='Menu de escolhas do usuário' />
         <img src={Logo} alt="Stockpro" />
         <div className={styles.links}>
-          <Link to='/vendas'><Button minWidth='10rem'>Vendas</Button></Link>
-          <Link to='/compras'><Button minWidth='10rem'>Compras</Button></Link>
-          <Link to='/receitas'><Button minWidth='10rem'>Receitas</Button></Link>
+          <Link to='/vendas'><Button minWidth='10rem' marginTop='0.2rem'>Vendas</Button></Link>
+          <Link to='/compras'><Button minWidth='10rem' marginTop='0.2rem'>Compras</Button></Link>
+          <Link to='/receitas'><Button minWidth='10rem' marginTop='0.2rem'>Receitas</Button></Link>
         </div>
     </section>
   )

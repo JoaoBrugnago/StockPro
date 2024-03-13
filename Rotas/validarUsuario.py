@@ -58,8 +58,6 @@ def validarUsuario_route():
         except Exception as e:
             token = f"Erro ao gerar o token JWT: {e}"
 
-        
-    print('passou')
     return {
         'valido': valido,
         'mensagem': mensagem,

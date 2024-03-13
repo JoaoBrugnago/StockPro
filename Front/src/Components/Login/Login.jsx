@@ -9,6 +9,7 @@ import Error from '../Helper/Error';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../../UserContext';
 import Head from '../Helper/Head';
+import Logo from '../../assets/logo.svg'
 
 const Login = () => {
   const user = useForm();
@@ -45,12 +46,13 @@ const Login = () => {
   return (
     <section className={`${styles.section} animeLeft`}>
       <Head title='Login' description='Login do sistema stockpro'/>
-      <h1 className='title'>Login</h1>
-      <div>
+      <img src={Logo} alt="Stockpro" width={200}/>
+      <div className={styles.conteudo}>
+        <h1 className='title'>Login</h1>
         <form onSubmit={handleSubmit}>
           <Input label="Usuário" type="text" name="user" {...user} />
           <Input label="Senha" type="password" name="password" {...password} />
-          {loading ? <Button minWidth='3rem' disabled>Enviar</Button> : <Button minWidth='3rem'>Enviar</Button>}
+          {loading ? <Button minWidth='3rem' marginTop='1.5rem' disabled>Enviar</Button> : <Button minWidth='100%' marginTop='1.5rem'>Enviar</Button>}
         </form>
         {error && <Error error={error} />}
         {resposta && error === null && <Error error={resposta} />}
