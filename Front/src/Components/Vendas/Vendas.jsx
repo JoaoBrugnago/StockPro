@@ -9,6 +9,7 @@ import Loading from '../Helper/Loading'
 import RetornaDataInicioAno from '../Utils/RetornaDataInicioAno'
 import RetornaDataDeHoje from '../Utils/RetornaDataDeHoje'
 import DadosFiltros from '../Dados/DadosFiltros'
+import Header from '../Header'
 
 const Vendas = () => {
   //-- Variável para validação de login
@@ -67,6 +68,7 @@ const Vendas = () => {
   if (dadosTotais)
   return (
     <>
+      <Header />
       <DadosFiltros filtros={filtros}/>
       <DadosTabela dadosTotais={dadosTotais} pagina={pagina} setPagina={setPagina} registrosTotaisTabela={registrosTotaisTabela} registrosTotaisLidos={registrosTotaisLidos} />
     </>
