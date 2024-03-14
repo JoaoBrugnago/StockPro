@@ -10,6 +10,7 @@ import RetornaDataInicioAno from '../Utils/RetornaDataInicioAno'
 import RetornaDataDeHoje from '../Utils/RetornaDataDeHoje'
 import DadosFiltros from '../Dados/DadosFiltros'
 import Header from '../Header'
+import Head from '../Helper/Head'
 
 const Vendas = () => {
   //-- Variável para validação de login
@@ -68,9 +69,10 @@ const Vendas = () => {
   if (dadosTotais)
   return (
     <>
-      <Header />
+      <Header title='Vendas' />
+      <Head title='Vendas' description='Dados de vendas do sistema stockpro'/>
       <DadosFiltros filtros={filtros}/>
-      <DadosTabela dadosTotais={dadosTotais} pagina={pagina} setPagina={setPagina} registrosTotaisTabela={registrosTotaisTabela} registrosTotaisLidos={registrosTotaisLidos} />
+      <DadosTabela data={dadosTotais} pagina={pagina} setPagina={setPagina} qtdRegistrosTabela={registrosTotaisTabela} qtdRegistrosUsuario={registrosTotaisLidos} />
     </>
   )
   else return null

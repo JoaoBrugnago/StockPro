@@ -5,3 +5,16 @@
   margin-top: 20px;
   padding: 0px 20px;
 }
+
+.conteudo {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.title {
+  font-size: 1rem;
+  line-height: 1;
+  color: #333;
+  margin-right: 10px;
+}
