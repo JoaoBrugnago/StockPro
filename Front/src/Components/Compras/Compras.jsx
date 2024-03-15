@@ -10,6 +10,7 @@ import DadosFiltros from '../Dados/DadosFiltros'
 import Error from '../Helper/Error'
 import Loading from '../Helper/Loading'
 import DadosTabela from '../Dados/DadosTabela'
+import { COMPRAS_DATA, REGISTROS_TOTAIS_COMPRAS } from '../../Api'
 
 const Compras = () => {
   const {login, userLogout} = useContext(userContext)
@@ -40,11 +41,20 @@ const Compras = () => {
   }, [login, userLogout])
 
   React.useEffect(() => {
-    //-- Fetch
+    async function fetchRegistros() {
+      const {url, options} = REGISTROS_TOTAIS_COMPRAS({dataInicial, dataFinal, valor})
+      const {json} = await requestQtdRegistros(url, options)
+      setQtdRegistrosLidos(json.registrosTotaisTabela)
+    }
+    fetchRegistros()
   }, [dataInicial, dataFinal, valor])
 
   React.useEffect(() => {
-    //-- Fetch
+    async function fetchData() {
+      const {url, options} = COMPRAS_DATA({qtdRegistrosUsuario, pagina, dataInicial, dataFinal, valor})
+      await requestValoresTabela(url, options)
+    }
+    fetchData()
   }, [pagina, qtdRegistrosUsuario, dataInicial, dataFinal, valor])
 
   if (errorValoresTabela || errorQtdRegistros) return <Error error={errorValoresTabela || errorQtdRegistros} />
@@ -52,7 +62,7 @@ const Compras = () => {
   if (dataValoresTabela || dataQtdRegistros)
     return (
       <>
-        <Header title='compras' />
+        <Header title='Compras' />
         <Head title='Compras' description='Dados de compras do sistema stockpro'/>
         <DadosFiltros filtros={filtros} />
         <DadosTabela data={dataValoresTabela} pagina={pagina} setPagina={setPagina} qtdRegistrosTabela={qtdRegistrosLidos} qtdRegistrosUsuario={qtdRegistrosUsuario} />

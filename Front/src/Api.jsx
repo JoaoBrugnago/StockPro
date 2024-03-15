@@ -50,3 +50,29 @@ export function REGISTROS_TOTAIS_VENDAS(body) {
     },
   };
 }
+
+export function COMPRAS_DATA(body) {
+  return {
+    url: API_URL + '/api/dadosCompras',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
+export function REGISTROS_TOTAIS_COMPRAS(body) {
+  return {
+    url: API_URL + '/api/registrosTotaisCompras',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}

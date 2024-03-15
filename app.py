@@ -4,6 +4,8 @@ from Rotas.validarUsuario import validarUsuario
 from Rotas.validarToken import validarToken
 from Rotas.retornarDadosVendas import retornarDadosVendas
 from Rotas.retornarRegistrosVendas import retornarRegistrosVendas
+from Rotas.retornarDadosCompras import retornarDadosCompras
+from Rotas.retornarRegistrosCompras import retornarRegistrosCompras
 
 from waitress import serve
 import os
@@ -16,6 +18,8 @@ app.register_blueprint(validarUsuario)
 app.register_blueprint(validarToken)
 app.register_blueprint(retornarDadosVendas)
 app.register_blueprint(retornarRegistrosVendas)
+app.register_blueprint(retornarDadosCompras)
+app.register_blueprint(retornarRegistrosCompras)
 
 # Rota para servir o arquivo HTML principal do React
 @app.route('/')
