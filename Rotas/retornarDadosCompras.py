@@ -34,9 +34,9 @@ def retornarDadosCompras_route():
             for linha in dadosBrutos:
                 valores_linha = [
                     '',
-                    str(linha[0]),
-                    str(linha[3]),
-                    str(linha[5]),
+                    str(linha[0]),   # cmpcode
+                    str(linha[1]),   # cmpdate
+                    str(round(linha[3], 2)),   # valor_total
                 ]
                 registros.append(valores_linha)
 

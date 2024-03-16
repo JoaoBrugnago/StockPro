@@ -12,14 +12,11 @@ class RegistrosCompras:
     cursor = conn.cursor()
     try:
       query = """
-          SELECT COUNT(*) AS qtdRegistros
-          FROM (
-            SELECT *, ROW_NUMBER() OVER (ORDER BY cmpcode) AS RowNum
-            FROM compras
-            WHERE (cmpdate >= ? AND cmpdate <= ?)
-            AND (cmpvalunitario >= (? - 100) OR ? = 0 OR ? IS NULL)
-            AND (cmpvalunitario <= (? + 100) OR ? = 0 OR ? IS NULL)
-          ) AS RowConstrainedResult
+          SELECT COUNT(DISTINCT cmpcode) AS qtdCompras
+          FROM compras
+          WHERE (cmpdate >= ? AND cmpdate <= ?)
+          AND (cmpvalunitario >= (? - 100) OR ? = 0 OR ? IS NULL)
+          AND (cmpvalunitario <= (? + 100) OR ? = 0 OR ? IS NULL)
       """
       cursor.execute(query, (dataInicial, dataFinal, valor, valor, valor, valor, valor, valor))
       row = cursor.fetchone()

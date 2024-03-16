@@ -13,17 +13,15 @@ class DadosVendas:
     cursor = conn.cursor()
     try:
       query = """
-          SELECT *
-          FROM (
-            SELECT *, ROW_NUMBER() OVER (ORDER BY vndcode) AS RowNum
-            FROM vendas
-            WHERE (vnddate >= ? AND vnddate <= ?)
-            AND (cltcode = ? OR ? = 0 OR ? IS NULL)
-            AND (vndvalunitario >= (? - 100) OR ? = 0 OR ? IS NULL)
-            AND (vndvalunitario <= (? + 100) OR ? = 0 OR ? IS NULL)
-          ) AS RowConstrainedResult
-          WHERE RowNum BETWEEN ? AND ?
-          ORDER BY vndcode
+        SELECT vndcode, vnddate, SUM(vndqtdreceita) AS total_receitas, SUM(vndvalunitario * vndqtdreceita) AS valor_total
+        FROM vendas
+        WHERE (vnddate >= ? AND vnddate <= ?)
+        AND (cltcode = ? OR ? = 0 OR ? IS NULL)
+        GROUP BY vndcode, vnddate
+        HAVING (SUM(vndvalunitario * vndqtdreceita) >= (? - 100) OR ? = 0 OR ? IS NULL)
+        AND (SUM(vndvalunitario * vndqtdreceita) <= (? + 100) OR ? = 0 OR ? IS NULL)
+        ORDER BY vnddate DESC
+        OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
       """
       cursor.execute(query, (dataInicial, dataFinal, cliente, cliente, cliente, valor, valor, valor, valor, valor, valor, inicioLeitura, fimLeitura))
 
