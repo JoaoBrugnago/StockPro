@@ -35,10 +35,10 @@ def retornarDadosVendas_route():
             for linha in dadosBrutos:
                 valores_linha = [
                     '',
-                    str(linha[0]),   # vndcode
-                    str(linha[3]),   # vnddate
-                    str(linha[2]),   # valor_total
-                    str(linha[4]),   # cltcode
+                    str(linha[0]),              # vndcode
+                    str(linha[1]),              # vnddate
+                    str(linha[2]),              # cltcode
+                    str(round(linha[3], 2)),    # valor_total     
                 ]
                 registros.append(valores_linha)
 
