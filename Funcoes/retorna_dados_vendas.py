@@ -13,19 +13,17 @@ class DadosVendas:
     cursor = conn.cursor()
     try:
       query = """
-        SELECT vndcode, vnddate, SUM(vndqtdreceita) AS total_receitas, SUM(vndvalunitario * vndqtdreceita) AS valor_total
+        SELECT vndcode, vnddate, cltcode, SUM(vndvalunitario * vndqtdreceita) AS valor_total
         FROM vendas
         WHERE (vnddate >= ? AND vnddate <= ?)
         AND (cltcode = ? OR ? = 0 OR ? IS NULL)
-        GROUP BY vndcode, vnddate
+        GROUP BY vndcode, vnddate, cltcode
         HAVING (SUM(vndvalunitario * vndqtdreceita) >= (? - 100) OR ? = 0 OR ? IS NULL)
         AND (SUM(vndvalunitario * vndqtdreceita) <= (? + 100) OR ? = 0 OR ? IS NULL)
         ORDER BY vnddate DESC
         OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
       """
       cursor.execute(query, (dataInicial, dataFinal, cliente, cliente, cliente, valor, valor, valor, valor, valor, valor, inicioLeitura, fimLeitura))
-
-
       registros = cursor.fetchall()
     except Exception as e:
       print(f"Erro ao executar consulta SQL: {e}")
