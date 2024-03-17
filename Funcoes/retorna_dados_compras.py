@@ -19,7 +19,7 @@ class DadosCompras:
         GROUP BY cmpcode, cmpdate
         HAVING (SUM(cmpvalunitario * cmpqtdproduto) >= (? - 100) OR ? = 0 OR ? IS NULL)
         AND (SUM(cmpvalunitario * cmpqtdproduto) <= (? + 100) OR ? = 0 OR ? IS NULL)
-        ORDER BY cmpdate DESC
+        ORDER BY cmpcode DESC
         OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
       """
       cursor.execute(query, (dataInicial, dataFinal, valor, valor, valor, valor, valor, valor, inicioLeitura, fimLeitura))

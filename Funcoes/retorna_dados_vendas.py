@@ -20,7 +20,7 @@ class DadosVendas:
         GROUP BY vndcode, vnddate, cltcode
         HAVING (SUM(vndvalunitario * vndqtdreceita) >= (? - 100) OR ? = 0 OR ? IS NULL)
         AND (SUM(vndvalunitario * vndqtdreceita) <= (? + 100) OR ? = 0 OR ? IS NULL)
-        ORDER BY vnddate DESC
+        ORDER BY vndcode DESC
         OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
       """
       cursor.execute(query, (dataInicial, dataFinal, cliente, cliente, cliente, valor, valor, valor, valor, valor, valor, inicioLeitura, fimLeitura))

@@ -12,15 +12,12 @@ class RegistrosVendas:
     cursor = conn.cursor()
     try:
       query = """
-          SELECT COUNT(*) AS qtdRegistros
-          FROM (
-            SELECT *, ROW_NUMBER() OVER (ORDER BY vndcode) AS RowNum
-            FROM vendas
-            WHERE (vnddate >= ? AND vnddate <= ?)
-            AND (cltcode = ? OR ? = 0 OR ? IS NULL)
-            AND (vndvalunitario >= (? - 100) OR ? = 0 OR ? IS NULL)
-            AND (vndvalunitario <= (? + 100) OR ? = 0 OR ? IS NULL)
-          ) AS RowConstrainedResult
+        SELECT COUNT(DISTINCT vndcode) AS qtdVendas
+        FROM vendas
+        WHERE (vnddate >= ? AND vnddate <= ?)
+        AND (cltcode = ? OR ? = 0 OR ? IS NULL)
+        AND (vndvalunitario >= (? - 100) OR ? = 0 OR ? IS NULL)
+        AND (vndvalunitario <= (? + 100) OR ? = 0 OR ? IS NULL)
       """
       cursor.execute(query, (dataInicial, dataFinal, cliente, cliente, cliente, valor, valor, valor, valor, valor, valor))
       row = cursor.fetchone()
