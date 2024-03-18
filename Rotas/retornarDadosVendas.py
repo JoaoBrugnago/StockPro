@@ -1,9 +1,11 @@
 from flask import Blueprint, request
 from markupsafe import escape
 from Funcoes.retorna_dados_vendas import DadosVendas
+from Funcoes.retorna_nome_cliente_a_partir_do_codigo import RetornaNomeCliente
 
 retornarDadosVendas = Blueprint('retornarDadosVendas', __name__)
 dadosVendas = DadosVendas()
+retornaNomeCliente = RetornaNomeCliente()
 
 @retornarDadosVendas.route('/api/dadosVendas', methods=['POST'])
 def retornarDadosVendas_route():
@@ -37,7 +39,7 @@ def retornarDadosVendas_route():
                     '',
                     str(linha[0]),              # vndcode
                     str(linha[1]),              # vnddate
-                    str(linha[2]),              # cltcode
+                    retornaNomeCliente.retornaNomeCliente(str(linha[2])) ,                     # cltcode -> cltname
                     str(round(linha[3], 2)),    # valor_total     
                 ]
                 registros.append(valores_linha)
