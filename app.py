@@ -1,5 +1,8 @@
 from flask import Flask, send_from_directory, send_file
 from flask_cors import CORS
+from waitress import serve
+import os
+
 from Rotas.validarUsuario import validarUsuario
 from Rotas.validarToken import validarToken
 from Rotas.retornarDadosVendas import retornarDadosVendas
@@ -7,13 +10,10 @@ from Rotas.retornarRegistrosVendas import retornarRegistrosVendas
 from Rotas.retornarDadosCompras import retornarDadosCompras
 from Rotas.retornarRegistrosCompras import retornarRegistrosCompras
 
-from waitress import serve
-import os
-
 app = Flask(__name__)
-
 CORS(app, resources={r"/*": {"origins": "*"}})
 
+# Rotas da api
 app.register_blueprint(validarUsuario)
 app.register_blueprint(validarToken)
 app.register_blueprint(retornarDadosVendas)

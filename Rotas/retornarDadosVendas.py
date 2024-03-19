@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from markupsafe import escape
+
 from Funcoes.retorna_dados_vendas import DadosVendas
 from Funcoes.retorna_nome_cliente_a_partir_do_codigo import RetornaNomeCliente
 

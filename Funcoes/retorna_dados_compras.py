@@ -1,17 +1,17 @@
 import pyodbc
 
 from .conexao_banco_dados import BancoDeDados
-bancoDeDados = BancoDeDados()
 
 class DadosCompras:
   def __init__(self):
-    self.conn_str = bancoDeDados.conn_str
+    pass
 
   def retorna_dados_compras(self, dataInicial, dataFinal, valor, inicioLeitura, fimLeitura):
     registros = []
-    conn = pyodbc.connect(self.conn_str)
-    cursor = conn.cursor()
+    conn = None
     try:
+      conn = BancoDeDados().get_connection()
+      cursor = conn.cursor()
       query = """
         SELECT cmpcode, cmpdate, SUM(cmpqtdproduto) AS total_produtos, SUM(cmpvalunitario * cmpqtdproduto) AS valor_total
         FROM compras
@@ -27,8 +27,8 @@ class DadosCompras:
     except Exception as e:
       print(f"Erro ao executar consulta SQL: {e}")
     finally:
-      cursor.close()
-      conn.close()
+      if (conn):
+        BancoDeDados().put_connection(conn)
 
     return registros
   

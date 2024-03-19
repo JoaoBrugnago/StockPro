@@ -1,17 +1,16 @@
 import pyodbc
 
 from .conexao_banco_dados import BancoDeDados
-bancoDeDados = BancoDeDados()
 
 class RetornaNomeCliente:
   def __init__(self):
-    self.conn_str = bancoDeDados.conn_str
+    pass
 
   def retornaNomeCliente(self, codigoCliente):
     nomeCliente = ''
     conn = None
     try:
-      conn = pyodbc.connect(self.conn_str)
+      conn = BancoDeDados().get_connection()
       cursor = conn.cursor()
 
       query = '''
@@ -33,4 +32,4 @@ class RetornaNomeCliente:
 
     finally:
       if conn:
-        conn.close()
+        BancoDeDados().put_connection(conn)

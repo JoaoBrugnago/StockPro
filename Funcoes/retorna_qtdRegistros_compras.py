@@ -1,16 +1,16 @@
 import pyodbc
 
 from .conexao_banco_dados import BancoDeDados
-bancoDeDados = BancoDeDados()
 
 class RegistrosCompras:
   def __init__(self):
-    self.conn_str = bancoDeDados.conn_str
+    pass
 
   def retorna_qtdregistros_compras(self, dataInicial, dataFinal, valor):
-    conn = pyodbc.connect(self.conn_str)
-    cursor = conn.cursor()
+    conn = None
     try:
+      conn = BancoDeDados().get_connection()
+      cursor = conn.cursor()
       query = """
           SELECT COUNT(DISTINCT cmpcode) AS qtdCompras
           FROM compras
@@ -26,7 +26,7 @@ class RegistrosCompras:
       print(f"Erro ao executar consulta SQL: {e}")
       qtdRegistros = 0
     finally:
-      cursor.close()
-      conn.close()
+      if (conn):
+        BancoDeDados().put_connection(conn)
 
     return qtdRegistros

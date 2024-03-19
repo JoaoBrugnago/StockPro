@@ -1,8 +1,8 @@
-from flask import Blueprint, request, jsonify
-from markupsafe import escape
-from Rotas.Seguranca.retornaChaveSecreta import ChaveSecreta
-import jwt
+from flask import Blueprint, request
 from datetime import datetime, timedelta
+import jwt
+
+from Rotas.Seguranca.retornaChaveSecreta import ChaveSecreta
 
 # Usuário padrão para entrar no sistema, só existirá um.
 usuarioPadrao = 'Suzana'
