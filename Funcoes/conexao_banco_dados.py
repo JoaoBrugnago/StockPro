@@ -2,7 +2,7 @@ import pyodbc
 
 class BancoDeDados:
   def __init__(self):
-    self.server   = 'database-1.c1icyqmici3x.us-east-2.rds.amazonaws.com'
+    self.server   = 'https://database-1.c1icyqmici3x.us-east-2.rds.amazonaws.com'
     self.database = 'stockpro'
     self.username = 'admin'
     self.password = 'ZRj2gOiQLNUpPDQhriGK'
