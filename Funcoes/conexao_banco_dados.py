@@ -2,7 +2,7 @@ import pyodbc
 
 class BancoDeDados:
   def __init__(self):
-    self.server   = 'https://database-1.c1icyqmici3x.us-east-2.rds.amazonaws.com'
+    self.server   = 'database-1.c1icyqmici3x.us-east-2.rds.amazonaws.com'
     self.database = 'stockpro'
     self.username = 'admin'
     self.password = 'ZRj2gOiQLNUpPDQhriGK'
@@ -16,4 +16,4 @@ class BancoDeDados:
 
   def put_connection(self, conn):
     # Função para retornar uma conexão ao pool
-    conn.close()
+    pass #conn.close()
