@@ -7,7 +7,8 @@ class BancoDeDados:
     self.username = 'admin'
     self.password = 'ZRj2gOiQLNUpPDQhriGK'
     self.driver   = '{SQL Server}'
-    self.conn_str = f'DRIVER={self.driver};SERVER={self.server};DATABASE={self.database};UID={self.username};PWD={self.password}'
+    self.port     = 1433
+    self.conn_str = f'DRIVER={self.driver};SERVER={self.server};DATABASE={self.database};UID={self.username};PWD={self.password};PORT={self.port}'
 
   def get_connection(self):
     # Função para obter uma conexão do pool
