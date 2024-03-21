@@ -6,7 +6,8 @@ class BancoDeDados:
     self.database = 'stockpro'
     self.username = 'admin'
     self.password = 'ZRj2gOiQLNUpPDQhriGK'
-    self.driver   = '{SQL Server}'
+    #self.driver   = '{SQL Server}'
+    self.driver   = 'ODBC Driver 13 for SQL Server'
     self.port     = 1433
     self.conn_str = f'DRIVER={self.driver};SERVER={self.server};DATABASE={self.database};UID={self.username};PWD={self.password};PORT={self.port}'
 
