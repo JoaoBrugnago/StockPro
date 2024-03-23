@@ -57,6 +57,7 @@ CREATE TABLE vendas(
     rctcode INT,
     vndvalunitario FLOAT,
     vnddate DATE,
+		vndqtdreceita INT,
     cltcode INT,
     PRIMARY KEY (vndcode, rctcode),
     FOREIGN KEY (cltcode) REFERENCES clientes(cltcode)
@@ -153,28 +154,24 @@ INSERT INTO clientes (cltcode, cltname, cltemail, cltphone, cltaddress, cltcity,
 (5, 'Luiza Costa', 'luiza.costa@example.com', '(51) 6789-0123', 'Rua E, 321', 'Porto Alegre', 'RS', 'Brasil', '87654-321', 'Moinhos de Vento');
 
 -- Inserir vendas com receitas existentes
-INSERT INTO vendas (vndcode, rctcode, vndvalunitario, vnddate, cltcode) VALUES
-(1, 1, 15.99, '2024-03-01', 1),   -- Venda 1: Receita 1 vendida por R$15.99 em 01/03/2024 para cliente 1
-(2, 2, 25.50, '2024-03-03', 2),   -- Venda 2: Receita 2 vendida por R$25.50 em 03/03/2024 para cliente 2
-(3, 3, 10.00, '2024-03-05', 3),   -- Venda 3: Receita 3 vendida por R$10.00 em 05/03/2024 para cliente 3
-(4, 4, 30.00, '2024-03-08', 4),   -- Venda 4: Receita 4 vendida por R$30.00 em 08/03/2024 para cliente 4
-(5, 5, 8.99, '2024-03-10', 5),    -- Venda 5: Receita 5 vendida por R$8.99 em 10/03/2024 para cliente 5
-(6, 1, 12.00, '2024-03-12', 1),   -- Venda 6: Receita 1 vendida por R$12.00 em 12/03/2024 para cliente 1
-(7, 2, 5.75, '2024-03-15', 2),    -- Venda 7: Receita 2 vendida por R$5.75 em 15/03/2024 para cliente 2
-(8, 3, 20.49, '2024-03-18', 3),   -- Venda 8: Receita 3 vendida por R$20.49 em 18/03/2024 para cliente 3
-(9, 4, 18.75, '2024-03-20', 4),   -- Venda 9: Receita 4 vendida por R$18.75 em 20/03/2024 para cliente 4
-(10, 5, 15.00, '2024-03-22', 5),  -- Venda 10: Receita 5 vendida por R$15.00 em 22/03/2024 para cliente 5
-(11, 1, 15.99, '2024-03-01', 1),  -- Venda 11: Receita 1 vendida por R$15.99 em 01/03/2024 para cliente 1
-(12, 2, 25.50, '2024-03-03', 2),  -- Venda 12: Receita 2 vendida por R$25.50 em 03/03/2024 para cliente 2
-(13, 3, 10.00, '2024-03-05', 3),  -- Venda 13: Receita 3 vendida por R$10.00 em 05/03/2024 para cliente 3
-(14, 4, 30.00, '2024-03-08', 4),  -- Venda 14: Receita 4 vendida por R$30.00 em 08/03/2024 para cliente 4
-(15, 5, 8.99, '2024-03-10', 5),   -- Venda 15: Receita 5 vendida por R$8.99 em 10/03/2024 para cliente 5
-(16, 1, 12.00, '2024-03-12', 1),  -- Venda 16: Receita 1 vendida por R$12.00 em 12/03/2024 para cliente 1
-(17, 2, 5.75, '2024-03-15', 2),   -- Venda 17: Receita 2 vendida por R$5.75 em 15/03/2024 para cliente 2
-(18, 3, 20.49, '2024-03-18', 3),  -- Venda 18: Receita 3 vendida por R$20.49 em 18/03/2024 para cliente 3
-(19, 4, 18.75, '2024-03-20', 4),  -- Venda 19: Receita 4 vendida por R$18.75 em 20/03/2024 para cliente 4
-(20, 5, 15.00, '2024-03-22', 5);  -- Venda 20: Receita 5 vendida por R$15.00 em 22/03/2024 para cliente 5
-
-# PARA VENDAS, UM REORGANIZATION:
-ALTER TABLE vendas
-ADD vndqtdreceita INT;
+INSERT INTO vendas (vndcode, rctcode, vndvalunitario, vnddate, vndqtdreceita, cltcode) VALUES
+(1, 1, 15.99, '2024-03-01', 1, 1),   -- Venda 1: Receita 1 vendida por R$15.99 em 01/03/2024 para cliente 1
+(2, 2, 25.50, '2024-03-03', 1, 2),   -- Venda 2: Receita 2 vendida por R$25.50 em 03/03/2024 para cliente 2
+(3, 3, 10.00, '2024-03-05', 1, 3),   -- Venda 3: Receita 3 vendida por R$10.00 em 05/03/2024 para cliente 3
+(4, 4, 30.00, '2024-03-08', 1, 4),   -- Venda 4: Receita 4 vendida por R$30.00 em 08/03/2024 para cliente 4
+(5, 5, 8.99, '2024-03-10', 1, 5),    -- Venda 5: Receita 5 vendida por R$8.99 em 10/03/2024 para cliente 5
+(6, 1, 12.00, '2024-03-12', 1, 1),   -- Venda 6: Receita 1 vendida por R$12.00 em 12/03/2024 para cliente 1
+(7, 2, 5.75, '2024-03-15', 1, 2),    -- Venda 7: Receita 2 vendida por R$5.75 em 15/03/2024 para cliente 2
+(8, 3, 20.49, '2024-03-18', 1, 3),   -- Venda 8: Receita 3 vendida por R$20.49 em 18/03/2024 para cliente 3
+(9, 4, 18.75, '2024-03-20', 1, 4),   -- Venda 9: Receita 4 vendida por R$18.75 em 20/03/2024 para cliente 4
+(10, 5, 15.00, '2024-03-22', 1, 5),  -- Venda 10: Receita 5 vendida por R$15.00 em 22/03/2024 para cliente 5
+(11, 1, 15.99, '2024-03-01', 1, 1),  -- Venda 11: Receita 1 vendida por R$15.99 em 01/03/2024 para cliente 1
+(12, 2, 25.50, '2024-03-03', 1, 2),  -- Venda 12: Receita 2 vendida por R$25.50 em 03/03/2024 para cliente 2
+(13, 3, 10.00, '2024-03-05', 1, 3),  -- Venda 13: Receita 3 vendida por R$10.00 em 05/03/2024 para cliente 3
+(14, 4, 30.00, '2024-03-08', 1, 4),  -- Venda 14: Receita 4 vendida por R$30.00 em 08/03/2024 para cliente 4
+(15, 5, 8.99, '2024-03-10', 1, 5),   -- Venda 15: Receita 5 vendida por R$8.99 em 10/03/2024 para cliente 5
+(16, 1, 12.00, '2024-03-12', 1, 1),  -- Venda 16: Receita 1 vendida por R$12.00 em 12/03/2024 para cliente 1
+(17, 2, 5.75, '2024-03-15', 1, 2),   -- Venda 17: Receita 2 vendida por R$5.75 em 15/03/2024 para cliente 2
+(18, 3, 20.49, '2024-03-18', 1, 3),  -- Venda 18: Receita 3 vendida por R$20.49 em 18/03/2024 para cliente 3
+(19, 4, 18.75, '2024-03-20', 1, 4),  -- Venda 19: Receita 4 vendida por R$18.75 em 20/03/2024 para cliente 4
+(20, 5, 15.00, '2024-03-22', 1, 5);  -- Venda 20: Receita 5 vendida por R$15.00 em 22/03/2024 para cliente 5
