@@ -10,13 +10,28 @@ const DadosFiltros = ({filtros}) => {
     })
   }, [filtros])
 
-  function handleKeyPress(e) {
+  function aplicarFiltros() {
+    filtros.forEach((item) => {
+      item.setValue(tempFiltros[item.name])
+    })
+  }
+
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      filtros.forEach((item) => {
-        item.setValue(tempFiltros[item.name])
-      })
+      aplicarFiltros()
     }
   }
+
+  const handleFiltros = () => {
+    aplicarFiltros()
+  }
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [filtros, tempFiltros]);
 
   function handleChange(target, name) {
     const {value} = target
@@ -36,9 +51,9 @@ const DadosFiltros = ({filtros}) => {
           id={item.name} 
           type={item.type}
           value={tempFiltros[item.name]}
-          onChange={({target}) => handleChange(target, item.name)}
-          onKeyPress={handleKeyPress} />
+          onChange={({target}) => handleChange(target, item.name)} />
       </div>)}
+      <button onClick={handleFiltros}>Filtrar</button>
     </div>
   )
 }

@@ -36,6 +36,19 @@
   box-shadow: 0 0 0 2px #fb1;
 }
 
+.container button {
+  width: fit-content;
+  height: fit-content;
+  font-size: 1rem;
+  padding: .3rem .6rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  background: #fb1;
+  color: #764701;
+  grid-column: 1 / -1;
+}
+
 @media (max-width: 520px) {
   .container label {
     width: 100px;
