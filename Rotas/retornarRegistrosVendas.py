@@ -7,7 +7,6 @@ registrosvendas = RegistrosVendas()
 
 @retornarRegistrosVendas.route('/api/registrosTotaisVendas', methods=['POST'])
 def retornarRegistrosVendas_route():
-    messages = ''
     registrosTotaisTabela = 0
     temErro  = False
 
@@ -24,19 +23,15 @@ def retornarRegistrosVendas_route():
 
     if (temErro == False):
         try:
-            messages += 'Entrou no try > '
             registrosTotaisTabela = registrosvendas.retorna_qtdregistros_vendas(dataInicial, dataFinal, cliente, valor)
-            messages += 'Qtd registros: ' + str(registrosTotaisTabela)
 
         except Exception as e:
             temErro = True
             print(f"Erro ao retornar registros de vendas: {e}")
         
     if (temErro == True):
-        messages += 'TEM ERRO'
         registrosTotaisTabela = 0
 
     return {
         'registrosTotaisTabela': registrosTotaisTabela,
-        'messages': messages,
     }

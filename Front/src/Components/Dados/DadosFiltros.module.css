@@ -49,6 +49,19 @@
   grid-column: 1 / -1;
 }
 
+.conteudo {
+  display: inline-block;
+  position: relative;
+}
+
+.iconPrompt {
+  position: absolute;
+  right: 5px;
+  width: 20px;
+  cursor: pointer;
+  z-index: 1;
+}
+
 @media (max-width: 520px) {
   .container label {
     width: 100px;
