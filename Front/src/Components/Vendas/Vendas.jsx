@@ -11,7 +11,7 @@ import RetornaDataDeHoje from '../Utils/RetornaDataDeHoje'
 import DadosFiltros from '../Dados/DadosFiltros'
 import Header from '../Header'
 import Head from '../Helper/Head'
-import ReactDOM from 'react-dom';
+import toggleModal from '../Utils/ToggleModal'
 
 const Vendas = () => {
   //-- Variável para validação de login
@@ -68,40 +68,8 @@ const Vendas = () => {
   }, [requestDadosTotais, pagina, registrosTotaisLidos, dataInicial, dataFinal, cliente, valor])
 
   React.useEffect(() => {
-    // Obtém o elemento root onde o modal será anexado
-    let modalRoot = document.getElementById('modal-root');
-    let overlay = document.querySelector('.overlay');
-    
-    if (!modalRoot) {
-      modalRoot = document.createElement('div');
-      modalRoot.setAttribute('id', 'modal-root');
-      document.body.appendChild(modalRoot);
-    }
-
-    if (!overlay) {
-      overlay = document.createElement('div');
-      overlay.classList.add('overlay');
-      document.body.appendChild(overlay); // Adiciona o overlay ao corpo do documento se ainda não existir
-    }
-  
-    // Função para mostrar ou ocultar o modal no DOM
-    const toggleModal = () => {
-      if (modalComponent) {
-          document.body.classList.add('modal-open');
-          overlay.style.display = 'block'; // Mostra o overlay
-          ReactDOM.render(modalComponent, modalRoot);
-      } else {
-          document.body.classList.remove('modal-open');
-          overlay.style.display = 'none'; // Oculta o overlay
-          ReactDOM.unmountComponentAtNode(modalRoot);
-      }
-    };
-    toggleModal();
-
-    return () => {
-      overlay.style.display = 'none'; // Garante que o overlay seja ocultado ao desmontar
-      ReactDOM.unmountComponentAtNode(modalRoot);
-    };
+    const modal = toggleModal(modalComponent)
+    return modal;
   }, [modalComponent]);
 
   if (errorDadosTotais || errorDadosIndividuais) return <Error error={errorDadosTotais || errorDadosIndividuais} />

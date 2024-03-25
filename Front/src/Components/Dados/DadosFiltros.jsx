@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './DadosFiltros.module.css'
 import { MdOutlineExpand } from "react-icons/md";
-//import PromptCliente from '../Prompt/PromptCliente';
 
 const DadosFiltros = ({filtros, setModalComponent}) => {
   const [tempFiltros, setTempFiltros] = React.useState({})
@@ -46,10 +45,9 @@ const DadosFiltros = ({filtros, setModalComponent}) => {
 
   async function handlePrompt(item) {
     try {
-      const modalModule = await import(`../Prompt/${item.prompt}`);
+      const modalModule = await import(`../Prompt/${item.prompt}.jsx`);
       const ModalComponent = modalModule.default;
-      setModalComponent(<ModalComponent />);
-      //setModalComponent(<PromptCliente setModalComponent={setModalComponent} />);
+      setModalComponent(<ModalComponent setModalComponent={setModalComponent} setValue={item.setValue}/>);
     } catch (error) {
       console.error('Erro ao carregar o modal:', error);
     }

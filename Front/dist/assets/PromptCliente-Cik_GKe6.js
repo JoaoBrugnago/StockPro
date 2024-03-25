@@ -1,0 +1,1 @@
+import{j as e}from"./index-CSv_maXb.js";const l=({setModalComponent:n,setValue:t})=>{function s(){t(2),n(null)}return e.jsx("div",{onClick:s,className:"container",children:e.jsx("p",{children:"Lista de clientes"})})};export{l as default};

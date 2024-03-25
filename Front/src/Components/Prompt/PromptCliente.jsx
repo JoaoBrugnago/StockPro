@@ -1,14 +1,15 @@
 import React from 'react'
-import styles from './PromptCliente.module.css'
+import './Prompt.css'
 
-const PromptCliente = ({setModalComponent}) => {
+const PromptCliente = ({setModalComponent, setValue}) => {
 
   function handleTeste() {
+    setValue(2)
     setModalComponent(null)
   }
 
   return (
-    <div onClick={handleTeste} className={styles.container}>
+    <div onClick={handleTeste} className='container'>
       <p>Lista de clientes</p>
     </div>
   )
