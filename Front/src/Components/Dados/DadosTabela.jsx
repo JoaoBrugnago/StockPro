@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './DadosTabela.module.css'
 
-const DadosTabela = ({data, pagina, setPagina, qtdRegistrosTabela, qtdRegistrosUsuario}) => {
+const DadosTabela = ({data, pagina, setPagina, qtdRegistrosTabela, qtdRegistrosUsuario, prompt}) => {
   const {rotulos, registros} = data
   const qtdPagina = Math.ceil(qtdRegistrosTabela / qtdRegistrosUsuario);
   const [inputPage, setInputPage] = React.useState('');
@@ -48,6 +48,12 @@ const DadosTabela = ({data, pagina, setPagina, qtdRegistrosTabela, qtdRegistrosU
     setInputPage('')
   }
 
+  function handlePrompt(registro) {
+    const cliente = Number(registro[1])
+    prompt[1](cliente)
+    prompt[0](null)
+  }
+
   return (
     <div className={styles.container}>
       <table className={styles.table}>
@@ -57,7 +63,7 @@ const DadosTabela = ({data, pagina, setPagina, qtdRegistrosTabela, qtdRegistrosU
           </tr>
         </thead>
         <tbody className={styles.tbody}>
-          {registros.map((registro, index) => <tr key={index}>
+          {registros.map((registro, index) => <tr key={index} onClick={prompt ? () => handlePrompt(registro) : null}>
             {registro.map((item, index) => <th key={index}>
               {item}
             </th>)}

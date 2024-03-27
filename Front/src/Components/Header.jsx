@@ -4,10 +4,14 @@ import { SlArrowLeftCircle } from "react-icons/sl";
 import styles from './Header.module.css'
 import { Link } from 'react-router-dom';
 
-const Header = ({title}) => {
+const Header = ({title, prompt}) => {
 
   function handleClick() {
-    window.history.back()
+    if(prompt) {
+      prompt[0](null)
+    } else {
+      window.history.back()
+    }
   }
 
   return (

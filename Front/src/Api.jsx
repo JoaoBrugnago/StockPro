@@ -76,3 +76,29 @@ export function REGISTROS_TOTAIS_COMPRAS(body) {
     },
   };
 }
+
+export function CLIENTES_DATA(body) {
+  return {
+    url: API_URL + '/api/dadosClientes',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
+export function REGISTROS_TOTAIS_CLIENTES(body) {
+  return {
+    url: API_URL + '/api/registrosTotaisClientes',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}

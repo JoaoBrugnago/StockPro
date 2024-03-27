@@ -62,10 +62,10 @@ const Compras = () => {
   if (dataValoresTabela || dataQtdRegistros)
     return (
       <>
-        <Header title='Compras' />
+        <Header title='Compras' prompt={false}/>
         <Head title='Compras' description='Dados de compras do sistema stockpro'/>
         <DadosFiltros filtros={filtros} />
-        <DadosTabela data={dataValoresTabela} pagina={pagina} setPagina={setPagina} qtdRegistrosTabela={qtdRegistrosLidos} qtdRegistrosUsuario={qtdRegistrosUsuario} />
+        <DadosTabela data={dataValoresTabela} pagina={pagina} setPagina={setPagina} qtdRegistrosTabela={qtdRegistrosLidos} qtdRegistrosUsuario={qtdRegistrosUsuario} prompt={false}/>
       </>
     )
   else return null

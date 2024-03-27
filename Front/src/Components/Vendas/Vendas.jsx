@@ -17,7 +17,7 @@ const Vendas = () => {
   //-- Variável para validação de login
   const {login, userLogout} = useContext(userContext)
 
-  //-- Variável para controle de modal / lista suspensa
+  //-- Variável para controle de modal
   const [modalComponent, setModalComponent] = React.useState(null);
 
   // Hook de fetch para dados individuais
@@ -77,10 +77,10 @@ const Vendas = () => {
   if (dadosTotais)
   return (
     <>
-      <Header title='Vendas' />
+      <Header title='Vendas' prompt={false}/>
       <Head title='Vendas' description='Dados de vendas do sistema stockpro'/>
       <DadosFiltros filtros={filtros} setModalComponent={setModalComponent}/>
-      <DadosTabela data={dadosTotais} pagina={pagina} setPagina={setPagina} qtdRegistrosTabela={registrosTotaisTabela} qtdRegistrosUsuario={registrosTotaisLidos} />
+      <DadosTabela data={dadosTotais} pagina={pagina} setPagina={setPagina} qtdRegistrosTabela={registrosTotaisTabela} qtdRegistrosUsuario={registrosTotaisLidos} prompt={false}/>
     </>
   )
   else return null
