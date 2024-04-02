@@ -77,9 +77,9 @@ export function REGISTROS_TOTAIS_COMPRAS(body) {
   };
 }
 
-export function CLIENTES_DATA(body) {
+export function CLIENTES_DATA_PROMPT(body) {
   return {
-    url: API_URL + '/api/dadosClientes',
+    url: API_URL + '/api/dadosClientesPrompt',
     options: {
       method: 'POST',
       headers: {
@@ -90,9 +90,9 @@ export function CLIENTES_DATA(body) {
   };
 }
 
-export function REGISTROS_TOTAIS_CLIENTES(body) {
+export function REGISTROS_TOTAIS_CLIENTES_PROMPT(body) {
   return {
-    url: API_URL + '/api/registrosTotaisClientes',
+    url: API_URL + '/api/registrosTotaisClientesPrompt',
     options: {
       method: 'POST',
       headers: {

@@ -19,7 +19,9 @@ const Header = ({title, prompt}) => {
       <SlArrowLeftCircle onClick={handleClick} size={25} />
       <div className={styles.conteudo}>
         <p className={styles.title}>{title}</p>
-        <Link to='/conta'><img src={Logo} alt="Stockpro" width={100}/></Link>
+        {prompt ? ( <img src={Logo} alt="Stockpro" width={100}/> ) : (
+          <Link to='/conta'><img src={Logo} alt="Stockpro" width={100}/></Link>
+        )}
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import './Prompt.css'
 import useFetch from '../../Hooks/useFetch'
-import { CLIENTES_DATA, REGISTROS_TOTAIS_CLIENTES } from '../../Api'
+import { CLIENTES_DATA_PROMPT, REGISTROS_TOTAIS_CLIENTES_PROMPT } from '../../Api'
 import Loading from '../Helper/Loading'
 import Error from '../Helper/Error'
 import Header from '../Header'
@@ -28,7 +28,7 @@ const PromptCliente = ({setModalComponent, setValue}) => {
 
   React.useEffect(() => {
     async function fetchRegistros() {
-      const {url, options} = REGISTROS_TOTAIS_CLIENTES({cliente})
+      const {url, options} = REGISTROS_TOTAIS_CLIENTES_PROMPT({cliente})
       const {json} = await requestDadosIndividuais(url, options)
       setRegistrosTotaisTabela(json.registrosTotaisTabela);
     }
@@ -37,7 +37,7 @@ const PromptCliente = ({setModalComponent, setValue}) => {
 
   React.useEffect(() => {
     async function fetchData() {
-      const {url, options} = CLIENTES_DATA({registrosTotaisLidos, pagina, cliente})
+      const {url, options} = CLIENTES_DATA_PROMPT({registrosTotaisLidos, pagina, cliente})
       await requestDadosTotais(url, options)
     }
     fetchData()
@@ -47,11 +47,11 @@ const PromptCliente = ({setModalComponent, setValue}) => {
   if (loadingDadosTotais || loadingDadosIndividuais) return <Loading />
   if (dadosTotais)
   return (
-    <>
+    <div className='container'>
       <Header title='Clientes' prompt={[setModalComponent]} />
       <DadosFiltros filtros={filtros} setModalComponent={setModalComponent}/>
       <DadosTabela data={dadosTotais} pagina={pagina} setPagina={setPagina} qtdRegistrosTabela={registrosTotaisTabela} qtdRegistrosUsuario={registrosTotaisLidos} prompt={[setModalComponent, setValue]} />
-    </>
+    </div>
   )
   else return null
 }

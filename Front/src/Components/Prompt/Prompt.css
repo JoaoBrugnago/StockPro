@@ -16,6 +16,7 @@
   overflow-x: auto;
 }
 
+/*
 .container-enter {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.8);
@@ -25,3 +26,4 @@
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
+*/

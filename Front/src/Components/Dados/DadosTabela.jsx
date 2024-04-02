@@ -49,7 +49,7 @@ const DadosTabela = ({data, pagina, setPagina, qtdRegistrosTabela, qtdRegistrosU
   }
 
   function handlePrompt(registro) {
-    const cliente = Number(registro[1])
+    const cliente = Number(registro[0])
     prompt[1](cliente)
     prompt[0](null)
   }
@@ -63,7 +63,7 @@ const DadosTabela = ({data, pagina, setPagina, qtdRegistrosTabela, qtdRegistrosU
           </tr>
         </thead>
         <tbody className={styles.tbody}>
-          {registros.map((registro, index) => <tr key={index} onClick={prompt ? () => handlePrompt(registro) : null}>
+          {registros.map((registro, index) => <tr key={index} className={styles.hoverLinha} onClick={prompt ? () => handlePrompt(registro) : null}>
             {registro.map((item, index) => <th key={index}>
               {item}
             </th>)}

@@ -9,6 +9,8 @@ from Rotas.retornarDadosVendas import retornarDadosVendas
 from Rotas.retornarRegistrosVendas import retornarRegistrosVendas
 from Rotas.retornarDadosCompras import retornarDadosCompras
 from Rotas.retornarRegistrosCompras import retornarRegistrosCompras
+from Rotas.retornarRegistrosClientesPrompt import retornarRegistrosClientesPrompt
+from Rotas.retornarDadosClientesPrompt import retornarDadosClientesPrompt
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -20,6 +22,8 @@ app.register_blueprint(retornarDadosVendas)
 app.register_blueprint(retornarRegistrosVendas)
 app.register_blueprint(retornarDadosCompras)
 app.register_blueprint(retornarRegistrosCompras)
+app.register_blueprint(retornarRegistrosClientesPrompt)
+app.register_blueprint(retornarDadosClientesPrompt)
 
 # Rota para servir o arquivo HTML principal do React
 @app.route('/')
